@@ -39,7 +39,7 @@ public class VisitDate {
     }
 
     private boolean isInValidRange(int date) {
-        return date < 1 || date > 31;
+        return date < DecemberCalendar.FIRST_DAY.getDay() || date > DecemberCalendar.LAST_DAY.getDay();
     }
 
     private static int parseDate(String date) {
