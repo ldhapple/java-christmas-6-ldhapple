@@ -2,7 +2,7 @@ package christmas.domain;
 
 import christmas.exception.menu.DuplicateMenuException;
 import christmas.exception.order.InvalidOrderFormatException;
-import christmas.exception.menucount.MenuCountLessThanZeroException;
+import christmas.exception.menucount.MenuCountLessThanOneException;
 import christmas.exception.menu.MenuNotExistException;
 import christmas.exception.menucount.MenuTotalCountExceedMaxException;
 import christmas.exception.order.OnlyDrinkOrderException;
@@ -67,7 +67,7 @@ class OrdersTest {
     @ValueSource(strings = {"크리스마스파스타-0"})
     @DisplayName("주문 수량이 0이면 예외 발생")
     void invalidRangeCountOrdersTest(String invalidRangeCountOrders) {
-        Assertions.assertThrows(MenuCountLessThanZeroException.class, () -> {
+        Assertions.assertThrows(MenuCountLessThanOneException.class, () -> {
             Orders.create(invalidRangeCountOrders);
         });
     }

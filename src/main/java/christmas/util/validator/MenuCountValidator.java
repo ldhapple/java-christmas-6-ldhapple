@@ -1,6 +1,6 @@
 package christmas.util.validator;
 
-import christmas.exception.menucount.MenuCountLessThanZeroException;
+import christmas.exception.menucount.MenuCountLessThanOneException;
 import christmas.exception.menucount.MenuTotalCountExceedMaxException;
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class MenuCountValidator {
 
     private static void validateAMenuCount(List<Integer> counts) {
         if (hasInvalidCount(counts)) {
-            throw new MenuCountLessThanZeroException();
+            throw new MenuCountLessThanOneException();
         }
     }
 
