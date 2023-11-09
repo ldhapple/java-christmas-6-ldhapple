@@ -57,6 +57,13 @@ class OrdersTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"타파스-20","크리스마스파스타-3,제로콜라-3"})
+    @DisplayName("주문 수량이 정상 범위 내에 있으면 예외를 발생시키지 않는다.")
+    void validOrdersCountTest(String validCountOrders) {
+        Assertions.assertDoesNotThrow(() -> Orders.create(validCountOrders));
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"크리스마스파스타-0"})
     @DisplayName("주문 수량이 0이면 예외 발생")
     void invalidRangeCountOrdersTest(String invalidRangeCountOrders) {
@@ -66,11 +73,11 @@ class OrdersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"크리스마스파스타-7,제로콜라-7,레드와인-7", "아이스크림-19,타파스-2"})
+    @ValueSource(strings = {"크리스마스파스타-7,제로콜라-7,레드와인-7", "아이스크림-19,타파스-2", "타파스-21"})
     @DisplayName("주문 수량의 총 합이 20이 넘으면 예외 발생")
-    void totalCountsExceedMaxTest(String exceedOrders) {
+    void totalCountsExceedMaxTest(String exceedCountOrders) {
         Assertions.assertThrows(MenuTotalCountExceedMaxException.class, () -> {
-            Orders.create(exceedOrders);
+            Orders.create(exceedCountOrders);
         });
     }
 
