@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    private static final String extractMenusRegex = "-\\d,*";
+    private static final String extractMenusRegex = "-\\d+,*";
     private static final String extractCountsRegex = ",*[가-힣]+-";
 
     public static int parseDate(String date) {
