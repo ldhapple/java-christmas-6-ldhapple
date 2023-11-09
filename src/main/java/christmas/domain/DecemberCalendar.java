@@ -1,8 +1,8 @@
 package christmas.domain;
 
 public enum DecemberCalendar {
-    FIRST_DAY(1, -1),
-    LAST_DAY(31, -1),
+    CHRISTMAS_EVENT_PERIOD(1, 25),
+    OTHER_EVENT_PERIOD(1, 31),
     WEEKEND_DAY(1,2),
     STAR_DAY(3, 25);
 
@@ -14,7 +14,7 @@ public enum DecemberCalendar {
         this.secondDay = secondDay;
     }
 
-    public int getDay() {
+    public int getFirstDay() {
         return firstDay;
     }
 
