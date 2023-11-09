@@ -1,19 +1,20 @@
 package christmas.util.validator;
 
 import christmas.domain.DecemberCalendar;
-import java.util.regex.Pattern;
+import christmas.exception.visitdate.InvalidRangeVisitDateException;
+import christmas.exception.visitdate.InvalidVisitDateFormatException;
 
 public class VisitDateValidator {
 
     public static void validateVisitDateFormat(String date) {
         if (isInvalidFormat(date)) {
-            throw new IllegalArgumentException();
+            throw new InvalidVisitDateFormatException();
         }
     }
 
     public static void validateValidRangeDate(int date) {
         if (isInValidRange(date)) {
-            throw new IllegalArgumentException();
+            throw new InvalidRangeVisitDateException();
         }
     }
 

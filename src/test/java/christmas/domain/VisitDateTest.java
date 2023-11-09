@@ -1,10 +1,9 @@
 package christmas.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import christmas.exception.visitdate.InvalidRangeVisitDateException;
+import christmas.exception.visitdate.InvalidVisitDateFormatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -22,7 +21,7 @@ class VisitDateTest {
     @ValueSource(strings = {"1일", "one", "1 3", "-1"})
     @DisplayName("숫자가 아닌 값을 입력했을 때 예외 발생")
     void invalidValueInputTest(String dateInvalidFormatInputValues) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidVisitDateFormatException.class, () -> {
            VisitDate.create(dateInvalidFormatInputValues);
         });
     }
@@ -31,7 +30,7 @@ class VisitDateTest {
     @ValueSource(strings = {"0", "32"})
     @DisplayName("1~31 까지의 숫자가 아닌 값을 입력했을 때 예외 발생")
     void invalidRangeInputTest(String dateInvalidRangeInputValues) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidRangeVisitDateException.class, () -> {
             VisitDate.create(dateInvalidRangeInputValues);
         });
     }

@@ -1,9 +1,7 @@
 package christmas.util.validator;
 
-import christmas.domain.Menu;
+import christmas.exception.order.InvalidOrderFormatException;
 import christmas.util.Parser;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class OrderValidator {
 
@@ -15,7 +13,7 @@ public class OrderValidator {
 
     private static void validateOrderFormat(String orders) {
         if (isInvalidFormat(orders)) {
-            throw new IllegalArgumentException();
+            throw new InvalidOrderFormatException();
         }
     }
 

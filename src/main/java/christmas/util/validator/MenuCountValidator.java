@@ -1,13 +1,34 @@
 package christmas.util.validator;
 
+import christmas.exception.menucount.MenuCountLessThanZeroException;
+import christmas.exception.menucount.MenuTotalCountExceedMaxException;
 import java.util.List;
 
 public class MenuCountValidator {
 
     public static void validateCounts(List<Integer> counts) {
+        validateAMenuCount(counts);
+        validateTotalCount(counts);
+    }
+
+    private static void validateAMenuCount(List<Integer> counts) {
         if (hasInvalidCount(counts)) {
-            throw new IllegalArgumentException();
+            throw new MenuCountLessThanZeroException();
         }
+    }
+
+    private static void validateTotalCount(List<Integer> counts) {
+        if (isInvalidTotalCount(counts)) {
+            throw new MenuTotalCountExceedMaxException();
+        }
+    }
+
+    private static boolean isInvalidTotalCount(List<Integer> counts) {
+        int totalMenuCount = counts.stream()
+                .mapToInt(x -> x)
+                .sum();
+
+        return biggerThanMax(totalMenuCount);
     }
 
     private static boolean hasInvalidCount(List<Integer> counts) {
@@ -16,14 +37,14 @@ public class MenuCountValidator {
     }
 
     private static boolean isValidCount(Integer count) {
-        return biggerThanZero(count) && lessThanMaxCount(count);
+        return biggerThanMin(count);
     }
 
-    private static boolean biggerThanZero(Integer count) {
+    private static boolean biggerThanMin(Integer count) {
         return count > MenuCountConstants.MIN.getValue();
     }
 
-    private static boolean lessThanMaxCount(Integer count) {
-        return count <= MenuCountConstants.MAX.getValue();
+    private static boolean biggerThanMax(int totalMenuCount) {
+        return totalMenuCount > MenuCountConstants.MAX.getValue();
     }
 }

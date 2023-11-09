@@ -1,6 +1,9 @@
 package christmas.util.validator;
 
 import christmas.domain.Menu;
+import christmas.exception.menu.DuplicateMenuException;
+import christmas.exception.menu.MenuNotExistException;
+import christmas.exception.order.OnlyDrinkOrderException;
 import java.util.List;
 
 public class MenuValidator {
@@ -13,19 +16,19 @@ public class MenuValidator {
 
     private static void validateExistMenus(List<String> menus) {
         if (hasNotExistsMenu(menus)) {
-            throw new IllegalArgumentException();
+            throw new MenuNotExistException();
         }
     }
 
     private static void validateOnlyDrink(List<String> menus) {
         if (isOnlyDrink(menus)) {
-            throw new IllegalArgumentException();
+            throw new OnlyDrinkOrderException();
         }
     }
 
     private static void validateDuplicateMenu(List<String> menus) {
         if (hasDuplicatedMenu(menus)) {
-            throw new IllegalArgumentException();
+            throw new DuplicateMenuException();
         }
     }
 
