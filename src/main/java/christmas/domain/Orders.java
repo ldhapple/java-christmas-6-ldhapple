@@ -5,6 +5,7 @@ import christmas.util.Parser;
 import christmas.util.validator.MenuCountValidator;
 import christmas.util.validator.MenuValidator;
 import christmas.util.validator.OrderValidator;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,5 +40,9 @@ public class Orders {
             order.put(food, count);
         }
         return order;
+    }
+
+    public Map<Food, Integer> getOrders() {
+        return Collections.unmodifiableMap(orders);
     }
 }
