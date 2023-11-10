@@ -25,4 +25,9 @@ public enum Drink implements Food {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public String getMenuFormat() {
+        return String.format("%s(%,d)", name, price);
+    }
 }
