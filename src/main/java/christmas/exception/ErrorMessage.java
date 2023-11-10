@@ -7,7 +7,7 @@ public enum ErrorMessage {
     ONLY_DRINK_ERROR("음료만 주문하실 수 없습니다.");
 
     private static final String HEADER = "[ERROR]";
-    private static final String FOOTER = "다시 입력해주세요.";
+    private static final String FOOTER = "다시 입력해 주세요.";
     private final String message;
 
     ErrorMessage(String bodyMessage) {
