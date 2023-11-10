@@ -27,7 +27,8 @@ public class OrderMenuOutputView {
     }
 
     private static void printTotalAmount(int totalAmount) {
-        System.out.println("할인 전 총주문 금액");
+        System.out.println();
+        System.out.println("<할인 전 총주문 금액>");
         System.out.printf("%,d원", totalAmount);
         System.out.println();
     }
