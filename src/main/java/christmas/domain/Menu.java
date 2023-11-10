@@ -6,19 +6,17 @@ import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum Menu {
     FOOD_MENU(Appetizer.class, MainFood.class, Dessert.class),
     DRINK_MENU(Drink.class);
 
-    private final Class<? extends Food>[] menuTypes;
+    private final Class<? extends Food>[] foodTypes;
 
     @SafeVarargs
     Menu(Class<? extends Food>... foodTypes) {
-        this.menuTypes = foodTypes;
+        this.foodTypes = foodTypes;
     }
 
     public static boolean isFoodInMenu(String foodName) {
@@ -26,38 +24,34 @@ public enum Menu {
     }
 
     public static Food getFoodByName(String foodName) {
-        return iterateFoods()
-                .filter(food -> foodName.equals(food.getName()))
+        return iterateMenus()
+                .filter(menu -> foodName.equals(menu.getName()))
                 .findFirst()
                 .orElse(null);
     }
 
     public static boolean isDrink(String foodName) {
-        return iterateFoods()
-                .anyMatch(food -> foodName.equals(food.getName()) &&
-                        foodContainDrinkMenuType(food));
+        return iterateMenus()
+                .anyMatch(menu -> foodName.equals(menu.getName()) &&
+                        menuContainDrinkMenuType(menu));
     }
 
-    private static boolean foodContainDrinkMenuType(Food food) {
-        return Arrays.asList(Menu.DRINK_MENU.getMenuTypes())
+    private static boolean menuContainDrinkMenuType(Food food) {
+        return Arrays.asList(Menu.DRINK_MENU.foodTypes)
                 .contains(food.getClass());
     }
 
-    private static Stream<? extends Food> iterateFoods() {
+    private static Stream<? extends Food> iterateMenus() {
         return Arrays.stream(Menu.values())
-                .flatMap(menus -> getFoodTypes(menus))
-                .flatMap(foodType -> getFoods(foodType));
+                .flatMap(menu -> getMenuTypes(menu))
+                .flatMap(menuType -> getMenu(menuType));
     }
 
-    private static Stream<Class<? extends Food>> getFoodTypes(Menu menu) {
-        return Arrays.stream(menu.getMenuTypes());
+    private static Stream<Class<? extends Food>> getMenuTypes(Menu menu) {
+        return Arrays.stream(menu.foodTypes);
     }
 
-    private static Stream<? extends Food> getFoods(Class<? extends Food> foodType) {
-        return Arrays.stream(foodType.getEnumConstants());
-    }
-
-    private Class<? extends Food>[] getMenuTypes() {
-        return menuTypes;
+    private static Stream<? extends Food> getMenu(Class<? extends Food> menuType) {
+        return Arrays.stream(menuType.getEnumConstants());
     }
 }
