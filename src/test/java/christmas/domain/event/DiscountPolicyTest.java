@@ -2,6 +2,7 @@ package christmas.domain.event;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import christmas.domain.VisitDate;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ class DiscountPolicyTest {
     @Test
     @DisplayName("25일을 입력하면 크리스마스할인, 별데이 할인, 평일 할인이 적용되어야 한다.")
     void findDiscountPolicyTest() {
-        int date = 25;
+        VisitDate date = VisitDate.create("25");
 
         List<DiscountPolicy> discountPolicies = DiscountPolicy.findDiscountPolicies(date);
 
@@ -24,7 +25,7 @@ class DiscountPolicyTest {
     @Test
     @DisplayName("29일을 입력하면 주말 할인만 적용되어야 한다.")
     void findDiscountPolicyOnlyWeekEndTest() {
-        int date = 29;
+        VisitDate date = VisitDate.create("29");
 
         List<DiscountPolicy> discountPolicies = DiscountPolicy.findDiscountPolicies(date);
 

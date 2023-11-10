@@ -1,8 +1,5 @@
 package christmas.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
 import org.assertj.core.api.Assertions;
