@@ -1,17 +1,17 @@
 package christmas.domain;
 
+import christmas.domain.food.Dessert;
 import christmas.domain.food.Food;
+import christmas.domain.food.MainFood;
 import christmas.util.Parser;
-import christmas.util.validator.MenuCountValidator;
-import christmas.util.validator.MenuValidator;
 import christmas.util.validator.OrderValidator;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Orders {
-
     private final Map<Food, Integer> orders;
 
     private Orders(String orders) {
@@ -40,6 +40,36 @@ public class Orders {
             order.put(food, count);
         }
         return order;
+    }
+
+    public int getMainMenuCount() {
+        int mainMenuCount = 0;
+
+        for (Entry<Food, Integer> entry : orders.entrySet()) {
+            Food menu = entry.getKey();
+            int menuCount = entry.getValue();
+
+            if (menu instanceof MainFood) {
+                mainMenuCount += menuCount;
+            }
+        }
+
+        return mainMenuCount;
+    }
+
+    public int getDessertMenuCount() {
+        int dessertMenuCount = 0;
+
+        for (Entry<Food, Integer> entry : orders.entrySet()) {
+            Food menu = entry.getKey();
+            int menuCount = entry.getValue();
+
+            if (menu instanceof Dessert) {
+                dessertMenuCount += menuCount;
+            }
+        }
+
+        return dessertMenuCount;
     }
 
     public Map<Food, Integer> getOrders() {
