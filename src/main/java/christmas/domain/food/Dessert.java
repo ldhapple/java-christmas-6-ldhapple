@@ -26,7 +26,7 @@ public enum Dessert implements Food {
     }
 
     @Override
-    public String getMenuFormat() {
+    public String getFoodByMenuFormat() {
         return String.format("%s(%,d)", name, price);
     }
 }
