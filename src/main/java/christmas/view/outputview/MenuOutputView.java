@@ -5,47 +5,45 @@ import christmas.domain.food.Dessert;
 import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
-import java.text.DecimalFormat;
-import java.util.Arrays;
 
 public class MenuOutputView {
 
     public static void printMenus() {
-        showAppetizerMenu();
-        showMainMenu();
-        showDessertMenu();
-        showDrinkMenu();
+        printAppetizerMenu();
+        printMainMenu();
+        printDessertMenu();
+        printDrinkMenu();
     }
 
-    private static void showAppetizerMenu() {
+    private static void printAppetizerMenu() {
         System.out.println("<애피타이저>");
-        StringBuilder menusView = setMenuView(Appetizer.class);
+        StringBuilder menusView = getMenuView(Appetizer.class);
         System.out.println(menusView);
     }
 
-    private static void showMainMenu() {
+    private static void printMainMenu() {
         System.out.println("<메인>");
-        StringBuilder menusView = setMenuView(MainFood.class);
+        StringBuilder menusView = getMenuView(MainFood.class);
         System.out.println(menusView);
     }
 
-    private static void showDessertMenu() {
+    private static void printDessertMenu() {
         System.out.println("<디저트>");
-        StringBuilder menusView = setMenuView(Dessert.class);
+        StringBuilder menusView = getMenuView(Dessert.class);
         System.out.println(menusView);
     }
 
-    private static void showDrinkMenu() {
+    private static void printDrinkMenu() {
         System.out.println("<음료>");
-        StringBuilder menusView = setMenuView(Drink.class);
+        StringBuilder menusView = getMenuView(Drink.class);
         System.out.println(menusView);
     }
 
-    private static StringBuilder setMenuView(Class<? extends Food> foodType) {
+    private static StringBuilder getMenuView(Class<? extends Food> foodType) {
         StringBuilder menusView = new StringBuilder();
 
-        for (Appetizer menu : Appetizer.values()) {
-            menusView.append(menu.getMenuFormat()).append(", ");
+        for (Enum<?> menu : foodType.asSubclass(Enum.class).getEnumConstants()) {
+            menusView.append(((Food)menu).getFoodByMenuFormat()).append(", ");
         }
 
         removeLastComma(menusView);
