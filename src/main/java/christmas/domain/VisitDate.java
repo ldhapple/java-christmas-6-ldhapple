@@ -22,4 +22,8 @@ public class VisitDate {
         VisitDateValidator.validateVisitDateFormat(date);
         VisitDateValidator.validateValidRangeDate(parseDate(date));
     }
+
+    public int getDate() {
+        return date;
+    }
 }
