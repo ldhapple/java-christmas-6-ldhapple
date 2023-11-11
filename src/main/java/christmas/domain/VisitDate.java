@@ -1,9 +1,8 @@
 package christmas.domain;
 
-import static christmas.util.Parser.*;
+import static christmas.util.parser.Parser.*;
 
 import christmas.util.validator.VisitDateValidator;
-import java.util.regex.Pattern;
 
 public class VisitDate {
 

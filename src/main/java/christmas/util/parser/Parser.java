@@ -1,11 +1,11 @@
-package christmas.util;
+package christmas.util.parser;
+
+import static christmas.util.parser.ParseConstants.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    private static final String extractMenusRegex = "-\\d+,*";
-    private static final String extractCountsRegex = ",*[가-힣]+-";
 
     public static int parseDate(String date) {
         return Integer.parseInt(date);
@@ -25,11 +25,11 @@ public class Parser {
     }
 
     private static String[] extractMenus(String orders) {
-        return orders.split(extractMenusRegex);
+        return orders.split(EXTRACT_MENU.getRegex());
     }
 
     private static String[] extractCounts(String orders) {
-        return orders.split(extractCountsRegex);
+        return orders.split(EXTRACT_MENU_COUNT.getRegex());
     }
 
     private static boolean isNotEmpty(String str) {

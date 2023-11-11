@@ -1,7 +1,7 @@
 package christmas.util.validator;
 
 import christmas.exception.order.InvalidOrderFormatException;
-import christmas.util.Parser;
+import christmas.util.parser.Parser;
 
 public class OrderValidator {
 

@@ -3,7 +3,7 @@ package christmas.util.validator;
 import christmas.domain.DecemberCalendar;
 import christmas.exception.visitdate.InvalidRangeVisitDateException;
 import christmas.exception.visitdate.InvalidVisitDateFormatException;
-import christmas.util.Parser;
+import christmas.util.parser.Parser;
 
 public class VisitDateValidator {
 

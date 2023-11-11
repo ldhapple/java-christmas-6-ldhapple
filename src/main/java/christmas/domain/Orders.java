@@ -3,7 +3,7 @@ package christmas.domain;
 import christmas.domain.food.Dessert;
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
-import christmas.util.Parser;
+import christmas.util.parser.Parser;
 import christmas.util.validator.OrderValidator;
 import java.util.Collections;
 import java.util.HashMap;
