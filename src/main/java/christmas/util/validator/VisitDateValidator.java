@@ -1,6 +1,6 @@
 package christmas.util.validator;
 
-import christmas.domain.DecemberCalendar;
+import christmas.domain.calendar.DecemberCalendar;
 import christmas.exception.visitdate.InvalidRangeVisitDateException;
 import christmas.exception.visitdate.InvalidVisitDateFormatException;
 import christmas.util.parser.Parser;

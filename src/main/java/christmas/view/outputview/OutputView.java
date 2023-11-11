@@ -1,8 +1,8 @@
 package christmas.view.outputview;
 
-import christmas.domain.Orders;
-import christmas.domain.VisitDate;
-import christmas.domain.dto.BenefitDto;
+import christmas.domain.restaurant.Orders;
+import christmas.domain.restaurant.VisitDate;
+import christmas.dto.BenefitDto;
 import christmas.domain.event.Badge;
 import christmas.view.outputview.event.CautionOutputView;
 import christmas.view.outputview.event.EventOutputView;

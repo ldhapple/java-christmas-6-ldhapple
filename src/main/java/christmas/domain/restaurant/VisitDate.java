@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.restaurant;
 
 import static christmas.util.parser.Parser.*;
 

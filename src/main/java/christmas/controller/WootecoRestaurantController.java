@@ -2,9 +2,8 @@ package christmas.controller;
 
 import static christmas.domain.event.EventConstants.*;
 
-import christmas.domain.Orders;
-import christmas.domain.VisitDate;
-import christmas.domain.event.EventConstants;
+import christmas.domain.restaurant.Orders;
+import christmas.domain.restaurant.VisitDate;
 import christmas.service.RestaurantCalculator;
 import christmas.view.inputview.InputValueType;
 import christmas.view.inputview.InputView;

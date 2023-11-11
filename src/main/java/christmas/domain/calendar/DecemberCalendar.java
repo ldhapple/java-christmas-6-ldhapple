@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.calendar;
 
 public enum DecemberCalendar {
     CHRISTMAS_EVENT_PERIOD(1, 25),

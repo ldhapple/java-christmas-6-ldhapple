@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.domain.restaurant.VisitDate;
 import christmas.exception.visitdate.InvalidRangeVisitDateException;
 import christmas.exception.visitdate.InvalidVisitDateFormatException;
 import org.junit.jupiter.api.Assertions;

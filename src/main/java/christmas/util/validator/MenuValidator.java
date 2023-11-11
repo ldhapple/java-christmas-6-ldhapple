@@ -1,6 +1,6 @@
 package christmas.util.validator;
 
-import christmas.domain.Menu;
+import christmas.domain.restaurant.Menu;
 import christmas.exception.menu.DuplicateMenuException;
 import christmas.exception.menu.MenuNotExistException;
 import christmas.exception.order.OnlyDrinkOrderException;

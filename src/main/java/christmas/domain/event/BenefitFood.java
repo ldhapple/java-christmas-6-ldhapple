@@ -1,8 +1,7 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import static christmas.domain.event.EventConstants.*;
 
-import christmas.domain.event.EventConstants;
 import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import java.util.Arrays;

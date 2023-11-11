@@ -2,12 +2,11 @@ package christmas.view.outputview.benefit;
 
 import static christmas.view.outputview.messages.MessageFormat.*;
 
-import christmas.domain.BenefitFood;
-import christmas.domain.dto.BenefitDto;
+import christmas.domain.event.BenefitFood;
+import christmas.dto.BenefitDto;
 import christmas.domain.event.DiscountPolicy;
 import christmas.domain.food.Food;
 import christmas.view.outputview.messages.Category;
-import christmas.view.outputview.messages.MessageFormat;
 import java.util.EnumMap;
 import java.util.Map.Entry;
 

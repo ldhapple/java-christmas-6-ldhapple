@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.domain.restaurant.Orders;
 import christmas.exception.menu.DuplicateMenuException;
 import christmas.exception.order.InvalidOrderFormatException;
 import christmas.exception.menucount.MenuCountLessThanOneException;

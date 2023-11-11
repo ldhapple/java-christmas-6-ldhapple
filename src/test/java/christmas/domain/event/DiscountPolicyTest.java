@@ -2,9 +2,8 @@ package christmas.domain.event;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.domain.VisitDate;
+import christmas.domain.restaurant.VisitDate;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

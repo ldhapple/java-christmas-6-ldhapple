@@ -1,8 +1,8 @@
 package christmas.domain.event;
 
-import static christmas.domain.DecemberCalendar.*;
+import static christmas.domain.calendar.DecemberCalendar.*;
 
-import christmas.domain.VisitDate;
+import christmas.domain.restaurant.VisitDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;

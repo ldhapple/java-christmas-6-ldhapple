@@ -1,7 +1,7 @@
-package christmas.domain.dto;
+package christmas.dto;
 
 import christmas.domain.event.DiscountPolicy;
-import christmas.domain.BenefitFood;
+import christmas.domain.event.BenefitFood;
 import java.util.EnumMap;
 
 public record BenefitDto(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {

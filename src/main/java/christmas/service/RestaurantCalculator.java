@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.domain.Orders;
+import christmas.domain.restaurant.Orders;
 import christmas.domain.food.Food;
 import java.util.Map;
 import java.util.Map.Entry;

@@ -1,7 +1,7 @@
 package christmas.view.inputview;
 
-import christmas.domain.Orders;
-import christmas.domain.VisitDate;
+import christmas.domain.restaurant.Orders;
+import christmas.domain.restaurant.VisitDate;
 import java.util.function.Function;
 
 public enum InputValueType {

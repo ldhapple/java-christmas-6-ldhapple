@@ -2,10 +2,9 @@ package christmas.view.outputview.restaurant;
 
 import static christmas.view.outputview.messages.MessageFormat.*;
 
-import christmas.domain.Orders;
+import christmas.domain.restaurant.Orders;
 import christmas.domain.food.Food;
 import christmas.view.outputview.messages.Category;
-import christmas.view.outputview.messages.MessageFormat;
 import java.util.Map;
 
 public class OrderOutputView {

@@ -1,14 +1,12 @@
 package christmas.service;
 
-import christmas.domain.BenefitFood;
-import christmas.domain.Orders;
-import christmas.domain.VisitDate;
+import christmas.domain.event.BenefitFood;
+import christmas.domain.restaurant.Orders;
+import christmas.domain.restaurant.VisitDate;
 import christmas.domain.event.DiscountPolicy;
 import christmas.domain.food.Food;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class EventCalculator {
 

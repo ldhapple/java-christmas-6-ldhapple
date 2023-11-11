@@ -1,12 +1,11 @@
 package christmas.controller;
 
-import christmas.domain.BenefitFood;
-import christmas.domain.Orders;
-import christmas.domain.VisitDate;
-import christmas.domain.dto.BenefitDto;
+import christmas.domain.event.BenefitFood;
+import christmas.domain.restaurant.Orders;
+import christmas.domain.restaurant.VisitDate;
+import christmas.dto.BenefitDto;
 import christmas.domain.event.Badge;
 import christmas.domain.event.DiscountPolicy;
-import christmas.domain.food.Food;
 import christmas.service.EventCalculator;
 import christmas.view.outputview.OutputView;
 import java.util.EnumMap;

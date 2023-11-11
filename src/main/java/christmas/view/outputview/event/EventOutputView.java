@@ -3,12 +3,11 @@ package christmas.view.outputview.event;
 import static christmas.domain.event.EventConstants.EVENT_MONTH;
 import static christmas.view.outputview.messages.MessageFormat.*;
 
-import christmas.domain.VisitDate;
-import christmas.domain.dto.BenefitDto;
+import christmas.domain.restaurant.VisitDate;
+import christmas.dto.BenefitDto;
 import christmas.domain.event.Badge;
 import christmas.view.outputview.benefit.BenefitOutputView;
 import christmas.view.outputview.messages.Category;
-import christmas.view.outputview.messages.MessageFormat;
 
 public class EventOutputView {
 

@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
+import christmas.domain.restaurant.Menu;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
