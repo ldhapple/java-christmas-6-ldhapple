@@ -12,7 +12,7 @@ public enum MenuType {
     private final String message;
 
     MenuType(String message) {
-        this.message = String.format("%s %s %s", HEADER, message, FOOTER);;
+        this.message = String.format("%s%s%s", HEADER, message, FOOTER);;
     }
 
     public String getMessage() {
