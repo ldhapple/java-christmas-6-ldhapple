@@ -3,16 +3,22 @@ package christmas.util.validator;
 import christmas.domain.DecemberCalendar;
 import christmas.exception.visitdate.InvalidRangeVisitDateException;
 import christmas.exception.visitdate.InvalidVisitDateFormatException;
+import christmas.util.Parser;
 
 public class VisitDateValidator {
 
-    public static void validateVisitDateFormat(String date) {
+    public static void validateVisitDate(String date) {
+        validateVisitDateFormat(date);
+        validateValidRangeDate(Parser.parseDate(date));
+    }
+
+    private static void validateVisitDateFormat(String date) {
         if (isInvalidFormat(date)) {
             throw new InvalidVisitDateFormatException();
         }
     }
 
-    public static void validateValidRangeDate(int date) {
+    private static void validateValidRangeDate(int date) {
         if (isInValidRange(date)) {
             throw new InvalidRangeVisitDateException();
         }

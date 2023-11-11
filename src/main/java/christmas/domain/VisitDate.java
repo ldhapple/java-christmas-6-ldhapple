@@ -19,8 +19,7 @@ public class VisitDate {
     }
 
     private void validate(String date) {
-        VisitDateValidator.validateVisitDateFormat(date);
-        VisitDateValidator.validateValidRangeDate(parseDate(date));
+        VisitDateValidator.validateVisitDate(date);
     }
 
     public int getDate() {
