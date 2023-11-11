@@ -1,4 +1,4 @@
-package christmas.util;
+package christmas.domain.event;
 
 public enum EventConstants {
     EVENT_MONTH(12);

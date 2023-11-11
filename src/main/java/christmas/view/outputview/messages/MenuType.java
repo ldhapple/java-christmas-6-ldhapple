@@ -1,6 +1,6 @@
-package christmas.view.outputview;
+package christmas.view.outputview.messages;
 
-public enum MenuTypeMessage {
+public enum MenuType {
     APPETIZER_TYPE("애피타이저"),
     MAIN_FOOD_TYPE("메인"),
     DESSERT_TYPE("디저트"),
@@ -11,7 +11,7 @@ public enum MenuTypeMessage {
 
     private final String message;
 
-    MenuTypeMessage(String message) {
+    MenuType(String message) {
         this.message = String.format("%s %s %s", HEADER, message, FOOTER);;
     }
 
