@@ -12,4 +12,8 @@ public record BenefitFoodDto(Food food, int count) {
     public static BenefitFoodDto createNoBenefitFood() {
         return new BenefitFoodDto(NO_BENEFIT_FOOD.getBenefitFood(), NO_BENEFIT_FOOD.getCount());
     }
+
+    public boolean hasBenefitFood() {
+        return this.count != 0;
+    }
 }

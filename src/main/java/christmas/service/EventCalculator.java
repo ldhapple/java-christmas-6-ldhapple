@@ -48,7 +48,7 @@ public class EventCalculator {
             totalDiscountAmount += discountAmount;
         }
 
-        if (benefitFood.count() != 0) {
+        if (benefitFood.hasBenefitFood()) {
             Food bonusFood = benefitFood.food();
             totalDiscountAmount += bonusFood.getPrice() * -1;
         }

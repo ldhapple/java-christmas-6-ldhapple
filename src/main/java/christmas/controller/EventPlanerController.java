@@ -40,7 +40,7 @@ public class EventPlanerController {
         int totalBenefitAmount = eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
 
         int lastBenefitAmount = totalBenefitAmount;
-        if (benefitFood.count() != 0) {
+        if (benefitFood.hasBenefitFood()) {
             Food bonusFood = benefitFood.food();
             lastBenefitAmount += bonusFood.getPrice();
         }
