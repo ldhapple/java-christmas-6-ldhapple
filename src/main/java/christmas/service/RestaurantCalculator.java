@@ -11,8 +11,7 @@ public class RestaurantCalculator {
 
         Map<Food, Integer> order = orders.getOrders();
 
-        for (Entry<Food, Integer> entry : order.entrySet())
-        {
+        for (Entry<Food, Integer> entry : order.entrySet()) {
             Food orderFood = entry.getKey();
             int orderFoodPrice = orderFood.getPrice();
             int orderFoodCount = entry.getValue();

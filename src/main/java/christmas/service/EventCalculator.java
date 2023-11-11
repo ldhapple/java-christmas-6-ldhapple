@@ -12,23 +12,6 @@ import java.util.Map.Entry;
 
 public class EventCalculator {
 
-    public int getOrderTotalAmount(Orders orders) {
-        int orderTotalPrice = 0;
-
-        Map<Food, Integer> order = orders.getOrders();
-
-        for (Entry<Food, Integer> entry : order.entrySet())
-        {
-            Food orderFood = entry.getKey();
-            int orderFoodPrice = orderFood.getPrice();
-            int orderFoodCount = entry.getValue();
-
-            orderTotalPrice += orderFoodPrice * orderFoodCount;
-        }
-
-        return orderTotalPrice;
-    }
-
     public EnumMap<DiscountPolicy, Integer> getDiscountResult (List<DiscountPolicy> discountPolicies, VisitDate visitDate, Orders orders) {
         EnumMap<DiscountPolicy, Integer> results = new EnumMap<>(DiscountPolicy.class);
 
@@ -58,6 +41,17 @@ public class EventCalculator {
 
     public int getExpectedPayAmount(int orderTotalAmount, int benefitAmount) {
         return orderTotalAmount + benefitAmount;
+    }
+
+    public int getLastBenefitAmount(int totalBenefitAmount, BenefitFood benefitFood) {
+        int lastBenefitAmount = totalBenefitAmount;
+
+        if (benefitFood.hasBenefitFood()) {
+            Food bonusFood = benefitFood.getFood();
+            lastBenefitAmount += bonusFood.getPrice();
+        }
+
+        return lastBenefitAmount;
     }
 
     private int getRequiredValue(VisitDate visitDate, Orders orders, DiscountPolicy discountPolicy) {

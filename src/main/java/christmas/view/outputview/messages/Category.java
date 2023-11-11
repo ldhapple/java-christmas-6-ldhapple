@@ -17,7 +17,6 @@ public enum Category {
 
     Category(String message) {
         this.message = String.format("%s%s%s", HEADER, message, FOOTER);
-        ;
     }
 
     public String getMessage() {

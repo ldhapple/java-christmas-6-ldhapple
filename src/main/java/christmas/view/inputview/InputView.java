@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class InputView {
 
     public static Object inputValue(InputValueType inputValueType) {
-        while(true) {
+        while (true) {
             try {
                 printInputMessage(inputValueType.getMessage());
 
