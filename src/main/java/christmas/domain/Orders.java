@@ -23,25 +23,6 @@ public class Orders {
         return new Orders(orders);
     }
 
-    private void validate(String orders) {
-        OrderValidator.validateOrders(orders);
-    }
-
-    private Map<Food, Integer> registerOrders(String orders) {
-        List<String> menus = Parser.parseMenus(orders);
-        List<Integer> counts = Parser.parseMenuCounts(orders);
-        Map<Food, Integer> order = new HashMap<>();
-
-        for (int idx = 0; idx < menus.size(); idx++) {
-            String menuName = menus.get(idx);
-            Food food = Menu.getFoodByName(menuName);
-            int count = counts.get(idx);
-
-            order.put(food, count);
-        }
-        return order;
-    }
-
     public int getMainMenuCount() {
         int mainMenuCount = 0;
 
@@ -70,6 +51,25 @@ public class Orders {
         }
 
         return dessertMenuCount;
+    }
+
+    private void validate(String orders) {
+        OrderValidator.validateOrders(orders);
+    }
+
+    private Map<Food, Integer> registerOrders(String orders) {
+        List<String> menus = Parser.parseMenus(orders);
+        List<Integer> counts = Parser.parseMenuCounts(orders);
+        Map<Food, Integer> order = new HashMap<>();
+
+        for (int idx = 0; idx < menus.size(); idx++) {
+            String menuName = menus.get(idx);
+            Food food = Menu.getFoodByName(menuName);
+            int count = counts.get(idx);
+
+            order.put(food, count);
+        }
+        return order;
     }
 
     public Map<Food, Integer> getOrders() {
