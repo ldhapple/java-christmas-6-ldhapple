@@ -1,24 +1,34 @@
 package christmas.controller;
 
+import static christmas.domain.event.EventConstants.*;
+
 import christmas.domain.Orders;
 import christmas.domain.VisitDate;
+import christmas.domain.event.EventConstants;
+import christmas.service.RestaurantCalculator;
 import christmas.view.inputview.InputValueType;
 import christmas.view.inputview.InputView;
 import christmas.view.outputview.OutputView;
 
 public class WootecoRestaurantController {
 
+    private final RestaurantCalculator restaurantCalculator;
     private final EventPlanerController eventPlanerController;
 
-    public WootecoRestaurantController(EventPlanerController eventPlanerController) {
+    public WootecoRestaurantController(RestaurantCalculator restaurantCalculator,
+                                       EventPlanerController eventPlanerController) {
+        this.restaurantCalculator = restaurantCalculator;
         this.eventPlanerController = eventPlanerController;
     }
 
     public void takeReservation() {
         VisitDate visitDate = getVisitDate();
         Orders orders = getOrders();
+        int orderTotalAmount = restaurantCalculator.getOrderTotalAmount(orders);
 
-        applyEvent(visitDate, orders);
+        OutputView.printEventPreviewMessage(visitDate);
+        OutputView.printOrder(orders, orderTotalAmount);
+        executeEvent(visitDate, orders, orderTotalAmount);
     }
 
     private VisitDate getVisitDate() {
@@ -33,8 +43,19 @@ public class WootecoRestaurantController {
         return orders;
     }
 
-    private void applyEvent(VisitDate visitDate, Orders orders) {
-        eventPlanerController.executeEventPlaner(visitDate, orders);
+    private void executeEvent(VisitDate visitDate, Orders orders, int orderTotalAmount) {
+        if (canApplyEvent(orderTotalAmount)) {
+            eventPlanerController.executeEventPlaner(visitDate, orders, orderTotalAmount);
+        }
+    }
+
+    private boolean canApplyEvent(int orderTotalAmount) {
+        if (orderTotalAmount >= EVENT_MIN_AMOUNT.getValue()) {
+            return true;
+        }
+
+        eventPlanerController.noEvent();
+        return false;
     }
 
     private Orders inputOrders() {
