@@ -20,30 +20,40 @@ public class EventPlanerController {
         this.eventCalculator = eventCalculator;
     }
 
-    public void executeEventPlaner(VisitDate visitDate, Orders orders) {
-        OutputView.printEventPreviewMessage(visitDate);
-        int orderTotalAmount = eventCalculator.getOrderTotalAmount(orders);
-        OutputView.printOrder(orders, orderTotalAmount);
-
-        List<DiscountPolicy> discountPolicies = DiscountPolicy.findDiscountPolicies(visitDate);
-
-        EnumMap<DiscountPolicy, Integer> discountResults = eventCalculator.getDiscountResult(discountPolicies,
-                visitDate, orders);
-
+    public void executeEventPlaner(VisitDate visitDate, Orders orders, int orderTotalAmount) {
+        EnumMap<DiscountPolicy, Integer> discountResults = getDiscountResult(visitDate, orders);
         BenefitFood benefitFood = BenefitFood.createBenefitFood(orderTotalAmount);
         BenefitDto benefits = BenefitDto.create(discountResults, benefitFood);
+
         int totalBenefitAmount = eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
-
-        int lastBenefitAmount = totalBenefitAmount;
-        if (benefitFood.hasBenefitFood()) {
-            Food bonusFood = benefitFood.getFood();
-            lastBenefitAmount += bonusFood.getPrice();
-        } //eventCalc
-
+        int lastBenefitAmount = eventCalculator.getLastBenefitAmount(totalBenefitAmount, benefitFood);
         int expectedPayAmount = eventCalculator.getExpectedPayAmount(orderTotalAmount, lastBenefitAmount);
+
         Badge benefitBadge = Badge.findBadge(totalBenefitAmount);
 
+        showEventResult(benefits, totalBenefitAmount, expectedPayAmount, benefitBadge);
+    }
+
+    public void noEvent() {
+        EnumMap<DiscountPolicy, Integer> discountResults = new EnumMap<>(DiscountPolicy.class);
+        BenefitDto benefits = BenefitDto.create(discountResults, BenefitFood.NO_BENEFIT_FOOD);
+
+        showNothingEventResult(benefits);
+    }
+
+    private EnumMap<DiscountPolicy, Integer> getDiscountResult(VisitDate visitDate, Orders orders) {
+        List<DiscountPolicy> discountPolicies = DiscountPolicy.findDiscountPolicies(visitDate);
+
+        return eventCalculator.getDiscountResult(discountPolicies, visitDate, orders);
+    }
+
+    private static void showEventResult(BenefitDto benefits, int totalBenefitAmount, int expectedPayAmount,
+                                        Badge benefitBadge) {
         OutputView.printEventDetails(benefits, totalBenefitAmount, expectedPayAmount);
         OutputView.printEventBadge(benefitBadge);
+    }
+
+    private static void showNothingEventResult(BenefitDto benefits) {
+        showEventResult(benefits, 0, 0, Badge.NO_BADGE);
     }
 }
