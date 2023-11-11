@@ -10,6 +10,6 @@ public class Application {
         WootecoRestaurantController controller = new WootecoRestaurantController(
                 new EventPlanerController(new EventCalculator()));
 
-        controller.run();
+        controller.takeReservation();
     }
 }

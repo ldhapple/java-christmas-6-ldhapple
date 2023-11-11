@@ -14,11 +14,26 @@ public class WootecoRestaurantController {
         this.eventPlanerController = eventPlanerController;
     }
 
-    public void run() {
+    public void takeReservation() {
+        VisitDate visitDate = getVisitDate();
+        Orders orders = getOrders();
+
+        applyEvent(visitDate, orders);
+    }
+
+    private VisitDate getVisitDate() {
         OutputView.printHelloMessage();
         VisitDate visitDate = inputVisitDate();
+        return visitDate;
+    }
+
+    private Orders getOrders() {
         OutputView.printMenu();
         Orders orders = inputOrders();
+        return orders;
+    }
+
+    private void applyEvent(VisitDate visitDate, Orders orders) {
         eventPlanerController.executeEventPlaner(visitDate, orders);
     }
 
