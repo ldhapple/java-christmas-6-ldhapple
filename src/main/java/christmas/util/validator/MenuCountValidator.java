@@ -1,5 +1,8 @@
 package christmas.util.validator;
 
+import static christmas.domain.event.EventConstants.*;
+
+import christmas.domain.event.EventConstants;
 import christmas.exception.menucount.MenuCountLessThanOneException;
 import christmas.exception.menucount.MenuTotalCountExceedMaxException;
 import java.util.List;
@@ -41,10 +44,10 @@ public class MenuCountValidator {
     }
 
     private static boolean biggerThanMin(Integer count) {
-        return count > MenuCountConstants.MIN.getValue();
+        return count >= MIN_ORDER_COUNT.getValue();
     }
 
     private static boolean biggerThanMax(int totalMenuCount) {
-        return totalMenuCount > MenuCountConstants.MAX.getValue();
+        return totalMenuCount > MAX_ORDER_COUNT.getValue();
     }
 }

@@ -1,7 +1,9 @@
 package christmas.domain.event;
 
 public enum EventConstants {
-    EVENT_MONTH(12);
+    EVENT_MONTH(12),
+    MIN_ORDER_COUNT(1),
+    MAX_ORDER_COUNT(20);
 
     private final int value;
 
