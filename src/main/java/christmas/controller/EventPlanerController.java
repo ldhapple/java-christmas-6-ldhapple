@@ -1,16 +1,13 @@
 package christmas.controller;
 
+import christmas.domain.BenefitFood;
 import christmas.domain.Orders;
 import christmas.domain.VisitDate;
 import christmas.domain.dto.BenefitDto;
-import christmas.domain.dto.BenefitFoodDto;
 import christmas.domain.event.Badge;
 import christmas.domain.event.DiscountPolicy;
-import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import christmas.service.EventCalculator;
-import christmas.view.inputview.InputValueType;
-import christmas.view.inputview.InputView;
 import christmas.view.outputview.OutputView;
 import java.util.EnumMap;
 import java.util.List;
@@ -33,7 +30,7 @@ public class EventPlanerController {
         EnumMap<DiscountPolicy, Integer> discountResults = eventCalculator.getDiscountResult(discountPolicies,
                 visitDate, orders);
 
-        BenefitFoodDto benefitFood = getBenefitFood(orderTotalAmount);
+        BenefitFood benefitFood = BenefitFood.createBenefitFood(orderTotalAmount);
         BenefitDto benefits = BenefitDto.create(discountResults, benefitFood);
         OutputView.printBenefits(benefits);
 
@@ -41,7 +38,7 @@ public class EventPlanerController {
 
         int lastBenefitAmount = totalBenefitAmount;
         if (benefitFood.hasBenefitFood()) {
-            Food bonusFood = benefitFood.food();
+            Food bonusFood = benefitFood.getFood();
             lastBenefitAmount += bonusFood.getPrice();
         }
 
@@ -50,13 +47,5 @@ public class EventPlanerController {
 
         OutputView.printResultAmount(totalBenefitAmount, expectedPayAmount);
         OutputView.printBadge(benefitBadge);
-    }
-
-    private BenefitFoodDto getBenefitFood(int orderTotalAmount) {
-        if (orderTotalAmount >= 120_000) {
-            return BenefitFoodDto.create();
-        }
-
-        return BenefitFoodDto.createNoBenefitFood();
     }
 }
