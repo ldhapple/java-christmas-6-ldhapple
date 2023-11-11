@@ -21,7 +21,7 @@ public class EventPlanerController {
     }
 
     public void executeEventPlaner(VisitDate visitDate, Orders orders) {
-        OutputView.printEventMessage(visitDate);
+        OutputView.printEventPreviewMessage(visitDate);
         int orderTotalAmount = eventCalculator.getOrderTotalAmount(orders);
         OutputView.printOrder(orders, orderTotalAmount);
 
@@ -32,20 +32,18 @@ public class EventPlanerController {
 
         BenefitFood benefitFood = BenefitFood.createBenefitFood(orderTotalAmount);
         BenefitDto benefits = BenefitDto.create(discountResults, benefitFood);
-        OutputView.printBenefits(benefits);
-
         int totalBenefitAmount = eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
 
         int lastBenefitAmount = totalBenefitAmount;
         if (benefitFood.hasBenefitFood()) {
             Food bonusFood = benefitFood.getFood();
             lastBenefitAmount += bonusFood.getPrice();
-        }
+        } //eventCalc
 
         int expectedPayAmount = eventCalculator.getExpectedPayAmount(orderTotalAmount, lastBenefitAmount);
         Badge benefitBadge = Badge.findBadge(totalBenefitAmount);
 
-        OutputView.printResultAmount(totalBenefitAmount, expectedPayAmount);
-        OutputView.printBadge(benefitBadge);
+        OutputView.printEventDetails(benefits, totalBenefitAmount, expectedPayAmount);
+        OutputView.printEventBadge(benefitBadge);
     }
 }
