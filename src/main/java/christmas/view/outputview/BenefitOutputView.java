@@ -17,7 +17,7 @@ public class BenefitOutputView {
     private static void printBenefitMenu(BenefitDto benefits) {
         System.out.println("<증정 메뉴>");
 
-        Food benefitFood = benefits.benefitFood();
+        Food benefitFood = benefits.benefitFood().food();
 
         System.out.printf("%s", getBenefitFoodName(benefitFood));
         printBenefitFoodCount(benefitFood);
@@ -30,7 +30,7 @@ public class BenefitOutputView {
         System.out.println("<혜택 내역>");
 
         EnumMap<DiscountPolicy, Integer> discountResults = benefits.discountResults();
-        Food benefitFood = benefits.benefitFood();
+        Food benefitFood = benefits.benefitFood().food();
         StringBuilder result = new StringBuilder();
 
         for (Entry<DiscountPolicy, Integer> discountResult : discountResults.entrySet()) {

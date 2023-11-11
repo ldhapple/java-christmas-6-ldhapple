@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.domain.Orders;
 import christmas.domain.VisitDate;
+import christmas.domain.dto.BenefitFoodDto;
 import christmas.domain.event.DiscountPolicy;
 import christmas.domain.food.Food;
 import java.util.EnumMap;
@@ -41,14 +42,15 @@ public class EventCalculator {
         return results;
     }
 
-    public int getTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, Food benefitFood) {
+    public int getTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFoodDto benefitFood) {
         int totalDiscountAmount = 0;
         for (int discountAmount : discountResults.values()) {
             totalDiscountAmount += discountAmount;
         }
 
-        if (benefitFood != null) {
-            totalDiscountAmount += benefitFood.getPrice() * -1;
+        if (benefitFood.count() != 0) {
+            Food bonusFood = benefitFood.food();
+            totalDiscountAmount += bonusFood.getPrice() * -1;
         }
 
         return totalDiscountAmount;
