@@ -5,7 +5,8 @@ public enum EventConstants {
     MIN_ORDER_COUNT(1),
     MAX_ORDER_COUNT(20),
     BENEFIT_MENU_MIN_AMOUNT(120_000),
-    BENEFIT_MENU_COUNT(1);
+    BENEFIT_MENU_COUNT(1),
+    EVENT_MIN_AMOUNT(10_000);
 
     private final int value;
 
