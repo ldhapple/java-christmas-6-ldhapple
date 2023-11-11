@@ -27,11 +27,7 @@ public class BenefitOutputView {
 
         printBenefitLists(result, discountResults);
         printBenefitFoodEvent(result, benefitFood);
-
-        if (hasNoBenefit(result)) {
-            result.append(NOTHING.getFormat());
-            result.append(LINE_SPACE.getFormat());
-        }
+        printIfNoBenefit(result);
 
         System.out.println(result);
     }
@@ -55,6 +51,13 @@ public class BenefitOutputView {
             Food bonusFood = benefitFood.getFood();
             result.append(BENEFIT_FOOD_EVENT.getFormat());
             result.append(String.format(MONEY.getFormat(), bonusFood.getPrice() * -1));
+            result.append(LINE_SPACE.getFormat());
+        }
+    }
+
+    private static void printIfNoBenefit(StringBuilder result) {
+        if (hasNoBenefit(result)) {
+            result.append(NOTHING.getFormat());
             result.append(LINE_SPACE.getFormat());
         }
     }

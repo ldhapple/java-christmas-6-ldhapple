@@ -13,15 +13,23 @@ public class BenefitFoodOutputView {
         System.out.println(Category.BENEFIT_MENU.getMessage());
 
         BenefitFood benefitFood = benefits.benefitFood();
+        System.out.println(getBenefitMenu(benefitFood));
 
-        if (!benefitFood.hasBenefitFood()) {
-            System.out.print(NOTHING.getFormat());
-        } else if (benefitFood.hasBenefitFood()) {
-            System.out.printf(MENU.getFormat(), benefitFood.getFood().getName());
-            System.out.printf(MENU_COUNT.getFormat(), benefitFood.getCount());
+        System.out.println();
+    }
+
+    private static String getBenefitMenu(BenefitFood benefitFood) {
+        if (existBenefitFood(benefitFood)) {
+            return String.format("%s\n%s",
+                    String.format(MENU.getFormat(), benefitFood.getFood().getName()),
+                    String.format(MENU_COUNT.getFormat(), benefitFood.getCount())
+            );
         }
-        System.out.println();
 
-        System.out.println();
+        return NOTHING.getFormat();
+    }
+
+    private static boolean existBenefitFood(BenefitFood benefitFood) {
+        return benefitFood.hasBenefitFood();
     }
 }

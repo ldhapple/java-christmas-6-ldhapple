@@ -51,7 +51,7 @@ public class MenuOutputView {
         StringBuilder menusView = new StringBuilder();
 
         for (Enum<?> menu : foodType.asSubclass(Enum.class).getEnumConstants()) {
-            menusView.append(((Food)menu).getFoodByMenuFormat())
+            menusView.append(((Food) menu).getFoodByMenuFormat())
                     .append(MENU_DELIMITER.getFormat());
         }
 
