@@ -1,5 +1,7 @@
 package christmas.view.outputview;
 
+import static christmas.view.outputview.MenuTypeMessage.*;
+
 import christmas.domain.food.Appetizer;
 import christmas.domain.food.Dessert;
 import christmas.domain.food.Drink;
@@ -16,25 +18,25 @@ public class MenuOutputView {
     }
 
     private static void printAppetizerMenu() {
-        System.out.println("<애피타이저>");
+        System.out.println(APPETIZER_TYPE.getMessage());
         StringBuilder menusView = getMenuView(Appetizer.class);
         System.out.println(menusView);
     }
 
     private static void printMainMenu() {
-        System.out.println("<메인>");
+        System.out.println(MAIN_FOOD_TYPE.getMessage());
         StringBuilder menusView = getMenuView(MainFood.class);
         System.out.println(menusView);
     }
 
     private static void printDessertMenu() {
-        System.out.println("<디저트>");
+        System.out.println(DESSERT_TYPE.getMessage());
         StringBuilder menusView = getMenuView(Dessert.class);
         System.out.println(menusView);
     }
 
     private static void printDrinkMenu() {
-        System.out.println("<음료>");
+        System.out.println(DRINK_TYPE.getMessage());
         StringBuilder menusView = getMenuView(Drink.class);
         System.out.println(menusView);
     }
@@ -43,7 +45,8 @@ public class MenuOutputView {
         StringBuilder menusView = new StringBuilder();
 
         for (Enum<?> menu : foodType.asSubclass(Enum.class).getEnumConstants()) {
-            menusView.append(((Food)menu).getFoodByMenuFormat()).append(", ");
+            menusView.append(((Food)menu).getFoodByMenuFormat())
+                    .append(", ");
         }
 
         removeLastComma(menusView);
