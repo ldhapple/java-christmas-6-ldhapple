@@ -54,7 +54,7 @@ public class EventPlanerController {
 
     private BenefitFoodDto getBenefitFood(int orderTotalAmount) {
         if (orderTotalAmount >= 120_000) {
-            return BenefitFoodDto.create(Drink.CHAMPAGNE);
+            return BenefitFoodDto.create();
         }
 
         return BenefitFoodDto.createNoBenefitFood();
