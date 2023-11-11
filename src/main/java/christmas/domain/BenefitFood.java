@@ -1,13 +1,16 @@
 package christmas.domain;
 
+import static christmas.domain.event.EventConstants.*;
+
+import christmas.domain.event.EventConstants;
 import christmas.domain.food.Drink;
 import christmas.domain.food.Food;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 public enum BenefitFood {
-    BENEFIT_FOOD(Drink.CHAMPAGNE, 1, (totalOrderAmount) -> totalOrderAmount >= 120_000),
-    NO_BENEFIT_FOOD(null, 0, (totalOrderAmount) -> totalOrderAmount < 120_000);
+    BENEFIT_FOOD(Drink.CHAMPAGNE, BENEFIT_MENU_COUNT.getValue(), (totalOrderAmount) -> totalOrderAmount >= BENEFIT_MENU_MIN_AMOUNT.getValue()),
+    NO_BENEFIT_FOOD(null, 0, (totalOrderAmount) -> totalOrderAmount < BENEFIT_MENU_MIN_AMOUNT.getValue());
 
     private final Food food;
     private final int count;
