@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 public enum BenefitFood {
     BENEFIT_FOOD(Drink.CHAMPAGNE, BENEFIT_MENU_COUNT.getValue(),
             (totalOrderAmount) -> totalOrderAmount >= BENEFIT_MENU_MIN_PAY_AMOUNT.getValue()),
-    NO_BENEFIT_FOOD(null, 0, (totalOrderAmount) -> totalOrderAmount < BENEFIT_MENU_MIN_PAY_AMOUNT.getValue());
+    NO_BENEFIT_FOOD(Drink.CHAMPAGNE, 0, (totalOrderAmount) -> totalOrderAmount < BENEFIT_MENU_MIN_PAY_AMOUNT.getValue());
 
     private final Food food;
     private final int count;
