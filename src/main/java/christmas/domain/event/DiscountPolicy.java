@@ -13,16 +13,16 @@ public enum DiscountPolicy {
 
     CHRISTMAS_DISCOUNT("크리스마스 디데이 할인",
             (date) -> 1_000 + ((date - 1) * 100),
-            (date) -> date >= CHRISTMAS_EVENT_PERIOD.getFirstDay() && date <= CHRISTMAS_EVENT_PERIOD.getSecondDay()),
+            (date) -> date >= CHRISTMAS_EVENT_PERIOD.getStartDay() && date <= CHRISTMAS_EVENT_PERIOD.getEndDay()),
     WEEKEND_DISCOUNT("주말 할인",
             (mainMenuCount) -> 2_023 * mainMenuCount,
-            (date) -> date % 7 == WEEKEND_DAY.getFirstDay() || date % 7 == WEEKEND_DAY.getSecondDay()),
+            (date) -> date % 7 == WEEKEND_DAY.getStartDay() || date % 7 == WEEKEND_DAY.getEndDay()),
     STAR_DAY_DISCOUNT("특별 할인",
             (anyValue) -> 1_000,
-            (date) -> date % 7 == STAR_DAY.getFirstDay() || date == STAR_DAY.getSecondDay()),
+            (date) -> date % 7 == STAR_DAY.getStartDay() || date == STAR_DAY.getEndDay()),
     WEEK_DAY_DISCOUNT("평일 할인",
             (dessertMenuCount) -> 2_023 * dessertMenuCount,
-            (date) -> date % 7 != WEEKEND_DAY.getFirstDay() && date % 7 != WEEKEND_DAY.getSecondDay());
+            (date) -> date % 7 != WEEKEND_DAY.getStartDay() && date % 7 != WEEKEND_DAY.getEndDay());
 
     private final String name;
     private final Function<Integer, Integer> discountAmountCalculator;

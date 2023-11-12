@@ -3,22 +3,22 @@ package christmas.domain.calendar;
 public enum DecemberCalendar {
     CHRISTMAS_EVENT_PERIOD(1, 25),
     OTHER_EVENT_PERIOD(1, 31),
-    WEEKEND_DAY(1, 2),
+    WEEKEND_DAY(1, (30 % 7)),
     STAR_DAY(3, 25);
 
-    private final int firstDay;
-    private final int secondDay;
+    private final int startDay;
+    private final int endDay;
 
-    DecemberCalendar(int firstDay, int secondDay) {
-        this.firstDay = firstDay;
-        this.secondDay = secondDay;
+    DecemberCalendar(int startDay, int endDay) {
+        this.startDay = startDay;
+        this.endDay = endDay;
     }
 
-    public int getFirstDay() {
-        return firstDay;
+    public int getStartDay() {
+        return startDay;
     }
 
-    public int getSecondDay() {
-        return secondDay;
+    public int getEndDay() {
+        return endDay;
     }
 }

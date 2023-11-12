@@ -36,10 +36,10 @@ public class VisitDateValidator {
     }
 
     private static boolean isExceedDate(int date) {
-        return date > DecemberCalendar.OTHER_EVENT_PERIOD.getSecondDay();
+        return date > DecemberCalendar.OTHER_EVENT_PERIOD.getEndDay();
     }
 
     private static boolean isLessDate(int date) {
-        return date < DecemberCalendar.OTHER_EVENT_PERIOD.getFirstDay();
+        return date < DecemberCalendar.OTHER_EVENT_PERIOD.getStartDay();
     }
 }
