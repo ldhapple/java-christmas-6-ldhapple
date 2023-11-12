@@ -27,14 +27,12 @@ public class EventCalculator {
 
     public int getTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {
         int totalDiscountAmount = 0;
+
         for (int discountAmount : discountResults.values()) {
             totalDiscountAmount += discountAmount;
         }
 
-        if (existBenefitFood(benefitFood)) {
-            Food bonusFood = benefitFood.getFood();
-            totalDiscountAmount += bonusFood.getPrice() * -1;
-        }
+        totalDiscountAmount = calculateIfExistBenefitFood(benefitFood, totalDiscountAmount);
 
         return totalDiscountAmount;
     }
@@ -52,6 +50,14 @@ public class EventCalculator {
         }
 
         return lastBenefitAmount;
+    }
+
+    private static int calculateIfExistBenefitFood(BenefitFood benefitFood, int totalDiscountAmount) {
+        if (existBenefitFood(benefitFood)) {
+            Food bonusFood = benefitFood.getFood();
+            totalDiscountAmount += bonusFood.getPrice() * -1;
+        }
+        return totalDiscountAmount;
     }
 
     private static int getRequiredValue(VisitDate visitDate, Orders orders, DiscountPolicy discountPolicy) {
