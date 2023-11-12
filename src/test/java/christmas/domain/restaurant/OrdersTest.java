@@ -62,7 +62,7 @@ class OrdersTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"타파스-20","크리스마스파스타-3,제로콜라-3"})
-    @DisplayName("주문 수량이 정상 범위 내에 있으면 예외를 발생시키지 않는다.")
+    @DisplayName("총 주문 수량이 20이하이면 예외를 발생시키지 않는다.")
     void validOrdersCountTest(String validCountOrders) {
         assertDoesNotThrow(() -> Orders.create(validCountOrders));
     }
