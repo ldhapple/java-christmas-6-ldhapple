@@ -23,9 +23,9 @@ public class EventPlanerController {
         BenefitFood benefitFood = checkBenefitFood(orderTotalAmount);
         BenefitDto benefits = getBenefits(discountResults, benefitFood);
 
-        int totalBenefitAmount = calculateTotalBenefitAmount(discountResults, benefitFood);
-        int finalBenefitAmount = calculateFinalBenefitAmount(benefitFood, totalBenefitAmount);
-        int expectedPayAmount = calculateExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
+        int totalBenefitAmount = getTotalBenefitAmount(discountResults, benefitFood);
+        int finalBenefitAmount = getFinalBenefitAmount(benefitFood, totalBenefitAmount);
+        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
 
         Badge benefitBadge = checkBenefitBadge(totalBenefitAmount);
 
@@ -52,7 +52,7 @@ public class EventPlanerController {
     }
 
     private void showNothingEventResult(BenefitDto benefits, int orderTotalAmount) {
-        int expectedPayAmount = calculateExpectedPayAmount(orderTotalAmount, 0);
+        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, 0);
         showEventResult(benefits, 0, expectedPayAmount, Badge.NO_BADGE);
     }
 
@@ -64,15 +64,15 @@ public class EventPlanerController {
         return BenefitDto.create(discountResults, benefitFood);
     }
 
-    private int calculateTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {
+    private int getTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {
         return eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
     }
 
-    private int calculateFinalBenefitAmount(BenefitFood benefitFood, int totalBenefitAmount) {
+    private int getFinalBenefitAmount(BenefitFood benefitFood, int totalBenefitAmount) {
         return eventCalculator.getLastBenefitAmount(totalBenefitAmount, benefitFood);
     }
 
-    private int calculateExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
+    private int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
         return eventCalculator.getExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
     }
 

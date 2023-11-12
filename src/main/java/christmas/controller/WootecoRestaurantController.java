@@ -22,7 +22,7 @@ public class WootecoRestaurantController {
     public void takeReservation() {
         VisitDate visitDate = getVisitDate();
         Orders orders = getOrders();
-        int orderTotalAmount = calculateOrderTotalAmount(orders);
+        int orderTotalAmount = getOrderTotalAmount(orders);
 
         showEventPreviewMessage(visitDate);
         showOrderDetails(orders, orderTotalAmount);
@@ -41,7 +41,7 @@ public class WootecoRestaurantController {
         return orders;
     }
 
-    private int calculateOrderTotalAmount(Orders orders) {
+    private int getOrderTotalAmount(Orders orders) {
         return restaurantCalculator.getOrderTotalAmount(orders);
     }
 
