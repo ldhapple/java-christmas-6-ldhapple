@@ -19,7 +19,7 @@ public class BenefitFoodOutputView {
 
     private static String getBenefitMenu(BenefitFood benefitFood) {
         if (existBenefitFood(benefitFood)) {
-            return String.format("%s\n%s",
+            return String.format("%s%s",
                     String.format(MENU.getFormat(), benefitFood.getFood().getName()),
                     String.format(MENU_COUNT.getFormat(), benefitFood.getCount())
             );
