@@ -12,7 +12,6 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class EventPlanerController {
-
     private final EventCalculator eventCalculator;
 
     public EventPlanerController(EventCalculator eventCalculator) {
@@ -21,23 +20,23 @@ public class EventPlanerController {
 
     public void executeEventPlaner(VisitDate visitDate, Orders orders, int orderTotalAmount) {
         EnumMap<DiscountPolicy, Integer> discountResults = getDiscountResult(visitDate, orders);
-        BenefitFood benefitFood = BenefitFood.createBenefitFood(orderTotalAmount);
-        BenefitDto benefits = BenefitDto.create(discountResults, benefitFood);
+        BenefitFood benefitFood = checkBenefitFood(orderTotalAmount);
+        BenefitDto benefits = getBenefits(discountResults, benefitFood);
 
-        int totalBenefitAmount = eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
-        int lastBenefitAmount = eventCalculator.getLastBenefitAmount(totalBenefitAmount, benefitFood);
-        int expectedPayAmount = eventCalculator.getExpectedPayAmount(orderTotalAmount, lastBenefitAmount);
+        int totalBenefitAmount = calculateTotalBenefitAmount(discountResults, benefitFood);
+        int finalBenefitAmount = calculateFinalBenefitAmount(benefitFood, totalBenefitAmount);
+        int expectedPayAmount = calculateExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
 
-        Badge benefitBadge = Badge.findBadge(totalBenefitAmount);
+        Badge benefitBadge = checkBenefitBadge(totalBenefitAmount);
 
         showEventResult(benefits, totalBenefitAmount, expectedPayAmount, benefitBadge);
     }
 
-    public void noEvent() {
+    public void notApplyEvent(int orderTotalAmount) {
         EnumMap<DiscountPolicy, Integer> discountResults = new EnumMap<>(DiscountPolicy.class);
-        BenefitDto benefits = BenefitDto.create(discountResults, BenefitFood.NO_BENEFIT_FOOD);
+        BenefitDto benefits = getBenefits(discountResults, BenefitFood.NO_BENEFIT_FOOD);
 
-        showNothingEventResult(benefits);
+        showNothingEventResult(benefits, orderTotalAmount);
     }
 
     private EnumMap<DiscountPolicy, Integer> getDiscountResult(VisitDate visitDate, Orders orders) {
@@ -52,7 +51,32 @@ public class EventPlanerController {
         OutputView.printEventBadge(benefitBadge);
     }
 
-    private static void showNothingEventResult(BenefitDto benefits) {
-        showEventResult(benefits, 0, 0, Badge.NO_BADGE);
+    private void showNothingEventResult(BenefitDto benefits, int orderTotalAmount) {
+        int expectedPayAmount = calculateExpectedPayAmount(orderTotalAmount, 0);
+        showEventResult(benefits, 0, expectedPayAmount, Badge.NO_BADGE);
+    }
+
+    private static BenefitFood checkBenefitFood(int orderTotalAmount) {
+        return BenefitFood.createBenefitFood(orderTotalAmount);
+    }
+
+    private static BenefitDto getBenefits(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {
+        return BenefitDto.create(discountResults, benefitFood);
+    }
+
+    private int calculateTotalBenefitAmount(EnumMap<DiscountPolicy, Integer> discountResults, BenefitFood benefitFood) {
+        return eventCalculator.getTotalBenefitAmount(discountResults, benefitFood);
+    }
+
+    private int calculateFinalBenefitAmount(BenefitFood benefitFood, int totalBenefitAmount) {
+        return eventCalculator.getLastBenefitAmount(totalBenefitAmount, benefitFood);
+    }
+
+    private int calculateExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
+        return eventCalculator.getExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
+    }
+
+    private static Badge checkBenefitBadge(int totalBenefitAmount) {
+        return Badge.findBadge(totalBenefitAmount);
     }
 }

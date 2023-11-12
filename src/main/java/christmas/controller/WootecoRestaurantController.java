@@ -10,7 +10,6 @@ import christmas.view.inputview.InputView;
 import christmas.view.outputview.OutputView;
 
 public class WootecoRestaurantController {
-
     private final RestaurantCalculator restaurantCalculator;
     private final EventPlanerController eventPlanerController;
 
@@ -23,10 +22,10 @@ public class WootecoRestaurantController {
     public void takeReservation() {
         VisitDate visitDate = getVisitDate();
         Orders orders = getOrders();
-        int orderTotalAmount = restaurantCalculator.getOrderTotalAmount(orders);
+        int orderTotalAmount = calculateOrderTotalAmount(orders);
 
-        OutputView.printEventPreviewMessage(visitDate);
-        OutputView.printOrder(orders, orderTotalAmount);
+        showEventPreviewMessage(visitDate);
+        showOrderDetails(orders, orderTotalAmount);
         executeEvent(visitDate, orders, orderTotalAmount);
     }
 
@@ -42,6 +41,18 @@ public class WootecoRestaurantController {
         return orders;
     }
 
+    private int calculateOrderTotalAmount(Orders orders) {
+        return restaurantCalculator.getOrderTotalAmount(orders);
+    }
+
+    private static void showEventPreviewMessage(VisitDate visitDate) {
+        OutputView.printEventPreviewMessage(visitDate);
+    }
+
+    private static void showOrderDetails(Orders orders, int orderTotalAmount) {
+        OutputView.printOrder(orders, orderTotalAmount);
+    }
+
     private void executeEvent(VisitDate visitDate, Orders orders, int orderTotalAmount) {
         if (canApplyEvent(orderTotalAmount)) {
             eventPlanerController.executeEventPlaner(visitDate, orders, orderTotalAmount);
@@ -53,7 +64,7 @@ public class WootecoRestaurantController {
             return true;
         }
 
-        eventPlanerController.noEvent();
+        eventPlanerController.notApplyEvent(orderTotalAmount);
         return false;
     }
 

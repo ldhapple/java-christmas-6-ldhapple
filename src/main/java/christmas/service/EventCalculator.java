@@ -37,8 +37,8 @@ public class EventCalculator {
         return totalDiscountAmount;
     }
 
-    public int getExpectedPayAmount(int orderTotalAmount, int benefitAmount) {
-        return orderTotalAmount + benefitAmount;
+    public int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
+        return orderTotalAmount + finalBenefitAmount;
     }
 
     public int getLastBenefitAmount(int totalBenefitAmount, BenefitFood benefitFood) {
