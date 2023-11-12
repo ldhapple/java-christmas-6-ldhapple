@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-@DisplayName("방문 날짜 입력 값 테스트")
 class VisitDateTest {
 
     @ParameterizedTest

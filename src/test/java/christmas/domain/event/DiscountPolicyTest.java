@@ -4,13 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.domain.restaurant.VisitDate;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DiscountPolicyTest {
 
     @Test
-    @DisplayName("25일을 입력하면 크리스마스할인, 별데이 할인, 평일 할인이 적용되어야 한다.")
+    @DisplayName("25일을 입력하면 크리스마스할인, 특별 할인, 평일 할인이 적용되어야 한다.")
     void findDiscountPolicyTest() {
         VisitDate date = VisitDate.create("25");
 
@@ -43,7 +44,18 @@ class DiscountPolicyTest {
         DiscountPolicy discountPolicy = DiscountPolicy.CHRISTMAS_DISCOUNT;
         int discountAmount = discountPolicy.getDiscountAmount(date);
 
-        org.assertj.core.api.Assertions.assertThat(discountAmount).isEqualTo(-3_300);
+        assertEquals(-3_300, discountAmount);
+    }
+
+    @Test
+    @DisplayName("디저트 메뉴 2개의 평일 할인의 할인 금액은 4,046원이다.")
+    void calcWeekDayDiscountTest() {
+        int dessertMenuSize = 2;
+
+        DiscountPolicy discountPolicy = DiscountPolicy.WEEK_DAY_DISCOUNT;
+        int discountAmount = discountPolicy.getDiscountAmount(dessertMenuSize);
+
+        assertEquals(-4_046, discountAmount);
     }
 
     @Test
@@ -54,17 +66,17 @@ class DiscountPolicyTest {
         DiscountPolicy discountPolicy = DiscountPolicy.WEEKEND_DISCOUNT;
         int discountAmount = discountPolicy.getDiscountAmount(mainMenuSize);
 
-        org.assertj.core.api.Assertions.assertThat(discountAmount).isEqualTo(-4_046);
+        assertEquals(-4_046, discountAmount);
     }
 
     @Test
-    @DisplayName("별 데이 할인 정책이 적용됐다면 어떤 값을 넣어도 할인 금액은 1,000원이다.")
+    @DisplayName("특별 할인 정책이 적용됐다면 어떤 값을 넣어도 할인 금액은 1,000원이다.")
     void calcStarDayDiscountTest() {
         int anyValue = 2222;
 
         DiscountPolicy discountPolicy = DiscountPolicy.STAR_DAY_DISCOUNT;
         int discountAmount = discountPolicy.getDiscountAmount(anyValue);
 
-        org.assertj.core.api.Assertions.assertThat(discountAmount).isEqualTo(-1_000);
+        assertEquals(-1_000, discountAmount);
     }
 }
