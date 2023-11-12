@@ -69,7 +69,7 @@ public class EventPlanerController {
     }
 
     private int getFinalBenefitAmount(BenefitFood benefitFood, int totalBenefitAmount) {
-        return eventCalculator.getLastBenefitAmount(totalBenefitAmount, benefitFood);
+        return eventCalculator.getFinalBenefitAmount(totalBenefitAmount, benefitFood);
     }
 
     private int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {

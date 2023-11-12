@@ -41,7 +41,7 @@ public class EventCalculator {
         return orderTotalAmount + finalBenefitAmount;
     }
 
-    public int getLastBenefitAmount(int totalBenefitAmount, BenefitFood benefitFood) {
+    public int getFinalBenefitAmount(int totalBenefitAmount, BenefitFood benefitFood) {
         int lastBenefitAmount = totalBenefitAmount;
 
         if (existBenefitFood(benefitFood)) {
