@@ -46,7 +46,7 @@ public class BenefitOutputView {
     }
 
     private static void printBenefitFoodEvent(StringBuilder result, BenefitFood benefitFood) {
-        if (benefitFood.hasBenefitFood()) {
+        if (existBenefitFood(benefitFood)) {
             Food bonusFood = benefitFood.getFood();
             result.append(BENEFIT_FOOD_EVENT.getFormat());
             result.append(String.format(MONEY.getFormat(), bonusFood.getPrice() * -1));
@@ -67,5 +67,9 @@ public class BenefitOutputView {
 
     private static boolean hasNoBenefit(StringBuilder result) {
         return result.isEmpty();
+    }
+
+    private static boolean existBenefitFood(BenefitFood benefitFood) {
+        return benefitFood.hasBenefitFood();
     }
 }
