@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public enum Badge {
-
     NO_BADGE("없음", (benefitAmount) -> benefitAmount * -1 < 5_000),
     SANTA_BADGE("산타", (benefitAmount) -> benefitAmount * -1 >= 20_000),
     TREE_BADGE("트리", (benefitAmount) -> benefitAmount * -1 >= 10_000),

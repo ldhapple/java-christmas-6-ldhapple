@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public enum DiscountPolicy {
-
     CHRISTMAS_DISCOUNT("크리스마스 디데이 할인",
             (date) -> 1_000 + ((date - 1) * 100),
             (date) -> date >= CHRISTMAS_EVENT_PERIOD.getStartDay() && date <= CHRISTMAS_EVENT_PERIOD.getEndDay()),

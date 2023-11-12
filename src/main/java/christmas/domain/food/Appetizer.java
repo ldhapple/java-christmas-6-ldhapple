@@ -3,7 +3,6 @@ package christmas.domain.food;
 import java.util.Arrays;
 
 public enum Appetizer implements Food {
-
     SOUP("양송이수프", 6_000),
     TAPAS("타파스", 5_500),
     SALAD("시저샐러드", 8_000);

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.restaurant;
 
 import christmas.domain.food.Food;
 import christmas.domain.food.MainFood;
