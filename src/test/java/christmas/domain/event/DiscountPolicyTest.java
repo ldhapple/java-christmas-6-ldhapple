@@ -37,7 +37,7 @@ class DiscountPolicyTest {
     }
 
     @Test
-    @DisplayName("23일의 크리스마스 할인 금액은 3,300원이다.")
+    @DisplayName("24일의 크리스마스 할인 금액은 3,300원이다.")
     void calcChristmasDiscountTest() {
         int date = 24;
 
