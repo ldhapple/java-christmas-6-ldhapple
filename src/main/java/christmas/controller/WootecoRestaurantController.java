@@ -60,12 +60,16 @@ public class WootecoRestaurantController {
     }
 
     private boolean canApplyEvent(int orderTotalAmount) {
-        if (orderTotalAmount >= EVENT_MIN_PAY_AMOUNT.getValue()) {
+        if (isOrderTotalAmountValidForEvent(orderTotalAmount)) {
             return true;
         }
 
         eventPlanerController.notApplyEvent(orderTotalAmount);
         return false;
+    }
+
+    private static boolean isOrderTotalAmountValidForEvent(int orderTotalAmount) {
+        return orderTotalAmount >= EVENT_MIN_PAY_AMOUNT.getValue();
     }
 
     private Orders inputOrders() {
