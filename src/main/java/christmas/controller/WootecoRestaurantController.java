@@ -56,8 +56,6 @@ public class WootecoRestaurantController {
     private void executeEvent(VisitDate visitDate, Orders orders, int orderTotalAmount) {
         if (canApplyEvent(orderTotalAmount)) {
             eventPlanerController.executeEventPlaner(visitDate, orders, orderTotalAmount);
-        } else if(!canApplyEvent(orderTotalAmount)) {
-            eventPlanerController.notApplyEvent(visitDate, orders, orderTotalAmount);
         }
     }
 
@@ -66,6 +64,7 @@ public class WootecoRestaurantController {
             return true;
         }
 
+        eventPlanerController.notApplyEvent(orderTotalAmount);
         return false;
     }
 
