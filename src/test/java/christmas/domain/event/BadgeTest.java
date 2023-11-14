@@ -36,7 +36,7 @@ class BadgeTest {
     }
 
     @Test
-    @DisplayName("혜택 금액이 20,000원 이상이면 이면 배지는 트리.")
+    @DisplayName("혜택 금액이 20,000원 이상이면 이면 배지는 산타.")
     void santaBadgeTest() {
         int benefitAmount = -20_000;
         Badge badge = Badge.findBadge(benefitAmount);
