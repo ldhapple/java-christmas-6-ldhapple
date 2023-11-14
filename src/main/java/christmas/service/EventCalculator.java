@@ -14,9 +14,10 @@ public class EventCalculator {
     public EnumMap<DiscountPolicy, Integer> getDiscountResult(List<DiscountPolicy> discountPolicies,
                                                               VisitDate visitDate, Orders orders) {
         EnumMap<DiscountPolicy, Integer> results = new EnumMap<>(DiscountPolicy.class);
+        DiscountRequiredValueMapper discountRequiredValues = DiscountRequiredValueMapper.create(visitDate, orders);
 
         for (DiscountPolicy discountPolicy : discountPolicies) {
-            int requiredValue = getRequiredValue(visitDate, orders, discountPolicy);
+            int requiredValue = discountRequiredValues.getRequiredValue(discountPolicy);
             int discountAmount = discountPolicy.getDiscountAmount(requiredValue);
 
             results.put(discountPolicy, discountAmount);
@@ -37,19 +38,19 @@ public class EventCalculator {
         return totalDiscountAmount;
     }
 
-    public int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
-        return orderTotalAmount + finalBenefitAmount;
-    }
-
     public int getFinalBenefitAmount(int totalBenefitAmount, BenefitFood benefitFood) {
-        int lastBenefitAmount = totalBenefitAmount;
+        int finalBenefitAmount = totalBenefitAmount;
 
         if (existBenefitFood(benefitFood)) {
             Food bonusFood = benefitFood.getFood();
-            lastBenefitAmount += bonusFood.getPrice();
+            finalBenefitAmount += bonusFood.getPrice();
         }
 
-        return lastBenefitAmount;
+        return finalBenefitAmount;
+    }
+
+    public int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
+        return orderTotalAmount + finalBenefitAmount;
     }
 
     private static int calculateIfExistBenefitFood(BenefitFood benefitFood, int totalDiscountAmount) {
@@ -58,11 +59,6 @@ public class EventCalculator {
             totalDiscountAmount += bonusFood.getPrice() * -1;
         }
         return totalDiscountAmount;
-    }
-
-    private static int getRequiredValue(VisitDate visitDate, Orders orders, DiscountPolicy discountPolicy) {
-        DiscountRequiredValueMapper discountRequiredValues = DiscountRequiredValueMapper.create(visitDate, orders);
-        return discountRequiredValues.getRequiredValue(discountPolicy);
     }
 
     private static boolean existBenefitFood(BenefitFood benefitFood) {
