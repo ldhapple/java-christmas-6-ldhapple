@@ -1,5 +1,7 @@
 package christmas.domain.food;
 
+import static christmas.domain.food.MenuFormat.*;
+
 import java.util.Arrays;
 
 public enum MainFood implements Food {
@@ -28,6 +30,6 @@ public enum MainFood implements Food {
 
     @Override
     public String getFoodByMenuFormat() {
-        return String.format("%s(%,d)", name, price);
+        return String.format(MENU_FORMAT.getFormat(), name, price);
     }
 }
