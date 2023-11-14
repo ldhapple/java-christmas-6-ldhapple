@@ -17,8 +17,7 @@ public class EventCalculator {
         DiscountRequiredValueMapper discountRequiredValues = DiscountRequiredValueMapper.create(visitDate, orders);
 
         for (DiscountPolicy discountPolicy : discountPolicies) {
-            int requiredValue = discountRequiredValues.getRequiredValue(discountPolicy);
-            int discountAmount = discountPolicy.getDiscountAmount(requiredValue);
+            int discountAmount = getDiscountAmount(discountRequiredValues, discountPolicy);
 
             results.put(discountPolicy, discountAmount);
         }
@@ -51,6 +50,11 @@ public class EventCalculator {
 
     public int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
         return orderTotalAmount + finalBenefitAmount;
+    }
+
+    private static int getDiscountAmount(DiscountRequiredValueMapper discountRequiredValues, DiscountPolicy discountPolicy) {
+        int requiredValue = discountRequiredValues.getRequiredValue(discountPolicy);
+        return discountPolicy.getDiscountAmount(requiredValue);
     }
 
     private static int calculateIfExistBenefitFood(BenefitFood benefitFood, int totalDiscountAmount) {
