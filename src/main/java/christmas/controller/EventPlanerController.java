@@ -1,11 +1,13 @@
 package christmas.controller;
 
+import christmas.domain.Customer;
 import christmas.domain.event.BenefitFood;
 import christmas.domain.restaurant.Orders;
 import christmas.domain.restaurant.VisitDate;
 import christmas.dto.BenefitDto;
 import christmas.domain.event.Badge;
 import christmas.domain.event.DiscountPolicy;
+import christmas.repository.CustomerRepository;
 import christmas.service.EventCalculator;
 import christmas.view.outputview.OutputView;
 import java.util.EnumMap;
@@ -28,13 +30,15 @@ public class EventPlanerController {
 
         Badge benefitBadge = checkBenefitBadge(totalBenefitAmount);
 
+        saveReservation(visitDate, orders, benefitBadge);
         showEventResult(benefits, totalBenefitAmount, expectedPayAmount, benefitBadge);
     }
 
-    public void notApplyEvent(int orderTotalAmount) {
+    public void notApplyEvent(VisitDate visitDate, Orders orders, int orderTotalAmount) {
         EnumMap<DiscountPolicy, Integer> discountResults = new EnumMap<>(DiscountPolicy.class);
         BenefitDto benefits = getBenefits(discountResults, BenefitFood.NO_BENEFIT_FOOD);
 
+        saveReservation(visitDate, orders, Badge.NO_BADGE);
         showNothingEventResult(benefits, orderTotalAmount);
     }
 
@@ -74,5 +78,12 @@ public class EventPlanerController {
 
     private static Badge checkBenefitBadge(int totalBenefitAmount) {
         return Badge.findBadge(totalBenefitAmount);
+    }
+
+    private static void saveReservation(VisitDate visitDate, Orders orders, Badge benefitBadge) {
+        CustomerRepository customerRepository = new CustomerRepository();
+        Customer bookedCustomer = Customer.create(visitDate, orders, benefitBadge);
+
+        customerRepository.save(bookedCustomer);
     }
 }
