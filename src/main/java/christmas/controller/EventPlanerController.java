@@ -24,8 +24,7 @@ public class EventPlanerController {
         BenefitDto benefits = getBenefits(discountResults, benefitFood);
 
         int totalBenefitAmount = getTotalBenefitAmount(discountResults, benefitFood);
-        int finalBenefitAmount = getFinalBenefitAmount(benefitFood, totalBenefitAmount);
-        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
+        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, benefitFood, totalBenefitAmount);
 
         Badge benefitBadge = checkBenefitBadge(totalBenefitAmount);
 
@@ -52,7 +51,7 @@ public class EventPlanerController {
     }
 
     private void showNothingEventResult(BenefitDto benefits, int orderTotalAmount) {
-        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, 0);
+        int expectedPayAmount = getExpectedPayAmount(orderTotalAmount, BenefitFood.NO_BENEFIT_FOOD,0);
         showEventResult(benefits, 0, expectedPayAmount, Badge.NO_BADGE);
     }
 
@@ -72,7 +71,8 @@ public class EventPlanerController {
         return eventCalculator.getFinalBenefitAmount(totalBenefitAmount, benefitFood);
     }
 
-    private int getExpectedPayAmount(int orderTotalAmount, int finalBenefitAmount) {
+    private int getExpectedPayAmount(int orderTotalAmount, BenefitFood benefitFood, int totalBenefitAmount) {
+        int finalBenefitAmount = getFinalBenefitAmount(benefitFood, totalBenefitAmount);
         return eventCalculator.getExpectedPayAmount(orderTotalAmount, finalBenefitAmount);
     }
 
